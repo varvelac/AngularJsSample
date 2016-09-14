@@ -30,17 +30,6 @@
 
 <div data-ng-controller="CalculatorController as ctrl" ng-cloak>
 
-    @*<div class='container-fluid typeahead-demo'>
-
-            <input type="text" ng-model="asyncSelected" placeholder="Locations"
-                   uib-typeahead="address for address in getLocation($viewValue)"
-                   typeahead-loading="loadingLocations"
-                   typeahead-no-results="noResults" class="form-control"
-                   ng-enter="ctrl.doNothing()">
-
-        </div>*@
-
-
 
     <div class="container-fluid">
         <div class="row">
@@ -289,7 +278,7 @@ alone, or $32,793 for a household of two or more. For a tax-waiver application, 
 
 @section scripts{
     <script src="~/Scripts/moment.js"></script>
-    <script src="~/Scripts/sabio.addresses.services.js"></script>
+    <script src="~/Scripts/RentApp.addresses.services.js"></script>
     <script type="text/javascript">
 
         (function () {
@@ -298,12 +287,12 @@ alone, or $32,793 for a household of two or more. For a tax-waiver application, 
             angular.module(APPNAME)
                 .factory('$addressServices', addressServiceFactory);
 
-            addressServiceFactory.$inject = ['$baseService', '$sabio'];
+            addressServiceFactory.$inject = ['$baseService', '$RentApp'];
 
-            function addressServiceFactory($baseService, $sabio) {
-                var aSabioServiceObject = sabio.addresses.services;
+            function addressServiceFactory($baseService, $RenApp) {
+                var aRentAppServiceObject = RentApp.addresses.services;
 
-                var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+                var newService = $baseService.merge(true, {}, aRentAppServiceObject, $baseService);
 
                 return newService;
             }
@@ -349,7 +338,7 @@ alone, or $32,793 for a household of two or more. For a tax-waiver application, 
 
                 vm.getLocation = function (address) {
 
-                    sabio.addresses.services.searchAddress(address, _onSuccessSearch, _onErrorSearch);
+                    Rentapp.addresses.services.searchAddress(address, _onSuccessSearch, _onErrorSearch);
                 };
 
                 function _onSuccessSearch(data) {
@@ -384,7 +373,7 @@ alone, or $32,793 for a household of two or more. For a tax-waiver application, 
                         console.log(vm.addressById);
 
 
-                        sabio.page.address = data.item;
+                        Rentapp.page.address = data.item;
                         vm.addressIdPayload = data.item.id;
 
                     })
